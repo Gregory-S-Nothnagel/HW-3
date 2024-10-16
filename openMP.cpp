@@ -84,7 +84,7 @@ public:
             toFile(DEBUG_PATH, "w", false);
         }
 
-#pragma omp parallel default(none) shared(MAX_GENERATIONS, change, DEBUG_MODE) num_threads(NUM_THREADS)
+#pragma omp parallel default(none) shared(MAX_GENERATIONS, change, DEBUG_MODE, DEBUG_PATH) num_threads(NUM_THREADS)
         {
             int tid = omp_get_thread_num();  // Get the thread ID
             int nthreads = omp_get_num_threads();  // Get the total number of threads
