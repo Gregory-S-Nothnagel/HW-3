@@ -17,11 +17,15 @@ icpx -O3 -march=native -flto -funroll-loops -ffast-math -Wall -o openMP openMP.c
 
 To Run, use this command:
 
-./openMP <SIZE> <MAX_GENERATIONS> <NUM_THREADS> <OUTPUT_FILE>
+./openMP <SIZE> <MAX_GENERATIONS> <NUM_THREADS> <OUTPUT_FILE> <DEBUG_MODE?> <DEBUG_FILE>
 
 for example:
 
-./openMP 100 100 1 /scratch/$USER/test.txt
+./openMP 5 100 4 /scratch/$USER/test.txt 1 /scratch/$USER/debug.txt
+
+or, for no debugging (only debug with small board sizes)
+
+./openMP 5 100 4 /scratch/$USER/test.txt 0 dummy_path.txt
 
 */
 
@@ -72,15 +76,15 @@ public:
 
     }
 
-    void advance(int MAX_GENERATIONS, int NUM_THREADS, bool debug) {
+    void advance(int MAX_GENERATIONS, int NUM_THREADS, bool DEBUG_MODE, string DEBUG_PATH) {
 
         bool change = false;
 
-        if (debug){
-            toFile("debug.txt", "w", false);
+        if (DEBUG_MODE){
+            toFile(DEBUG_PATH, "w", false);
         }
 
-#pragma omp parallel default(none) shared(MAX_GENERATIONS, change, debug) num_threads(NUM_THREADS)
+#pragma omp parallel default(none) shared(MAX_GENERATIONS, change, DEBUG_MODE) num_threads(NUM_THREADS)
         {
             int tid = omp_get_thread_num();  // Get the thread ID
             int nthreads = omp_get_num_threads();  // Get the total number of threads
@@ -120,8 +124,8 @@ public:
 #pragma omp single
                 {
                     swap(cells, cellsNext);
-                    if (change && debug) {
-                        toFile("debug.txt", "a", false);
+                    if (change && DEBUG_MODE) {
+                        toFile(DEBUG_PATH, "a", false);
                     }
                     num_iterations = reps + 1;
                 }
@@ -160,8 +164,8 @@ public:
 
 int main(int argc, char* argv[]) { // int argc, char* argv[]
 
-    if (argc != 6) {
-        cerr << "Usage: " << argv[0] << " <SIZE> <MAX_GENERATIONS> <NUM_THREADS> <OUTPUT_FILE> <DEBUG_MODE?>" << endl;
+    if (argc != 7) {
+        cerr << "Usage: " << argv[0] << " <SIZE> <MAX_GENERATIONS> <NUM_THREADS> <OUTPUT_FILE> <DEBUG_MODE?> <DEBUG_FILE>" << endl;
         return 1;
     }
     
@@ -172,6 +176,7 @@ int main(int argc, char* argv[]) { // int argc, char* argv[]
     int NUM_THREADS = stoi(argv[3]);
     string PATH = string(argv[4]);
     bool DEBUG_MODE = stoi(argv[5]);
+    string DEBUG_PATH;
 
     vector<vector<bool>> randomInitialFrame;
     for (int row = 0; row < SIZE; row++) {
@@ -187,7 +192,7 @@ int main(int argc, char* argv[]) { // int argc, char* argv[]
 
     int startTime = time(nullptr);
 
-    C.advance(MAX_GENERATIONS, NUM_THREADS, DEBUG_MODE);
+    C.advance(MAX_GENERATIONS, NUM_THREADS, DEBUG_MODE, DEBUG_PATH);
 
     int endTime = time(nullptr);
 
