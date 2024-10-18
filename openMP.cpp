@@ -52,7 +52,7 @@ public:
 
     Conway(int SIZE, vector<vector<bool>>& initialFrame) : SIZE(SIZE) {
 
-        cells = new bool * [SIZE + 2];
+        cells = new bool* [SIZE + 2];
         for (int i = 0; i < SIZE + 2; i++) {
             cells[i] = new bool[SIZE + 2];
             for (int j = 0; j < SIZE + 2; j++) cells[i][j] = false; // all cells start dead
@@ -66,7 +66,7 @@ public:
         }
 
         // Array of next frames cells is a copy of start frame
-        cellsNext = new bool * [SIZE + 2];
+        cellsNext = new bool* [SIZE + 2];
         for (int i = 0; i < SIZE + 2; i++) {
             cellsNext[i] = new bool[SIZE + 2];
             for (int j = 0; j < SIZE + 2; j++) {
@@ -80,7 +80,7 @@ public:
 
         bool change = false;
 
-        if (DEBUG_MODE){
+        if (DEBUG_MODE) {
             toFile(DEBUG_PATH, "w", false);
         }
 
@@ -88,7 +88,7 @@ public:
         {
             int tid = omp_get_thread_num();  // Get the thread ID
             int nthreads = omp_get_num_threads();  // Get the total number of threads
-            
+
             // Calculate which row this thread is responsible for
             int rows_per_thread = SIZE / nthreads;  // Number of rows each thread will handle
             int start_row = tid * rows_per_thread + 1;  // Starting row for this thread
@@ -138,7 +138,7 @@ public:
 #pragma omp barrier
 
             }
-           
+
         }
 
     }
@@ -168,7 +168,7 @@ int main(int argc, char* argv[]) { // int argc, char* argv[]
         cerr << "Usage: " << argv[0] << " <SIZE> <MAX_GENERATIONS> <NUM_THREADS> <OUTPUT_FILE> <DEBUG_MODE?> <DEBUG_FILE>" << endl;
         return 1;
     }
-    
+
 
 
     int SIZE = stoi(argv[1]);
@@ -176,7 +176,7 @@ int main(int argc, char* argv[]) { // int argc, char* argv[]
     int NUM_THREADS = stoi(argv[3]);
     string PATH = string(argv[4]);
     bool DEBUG_MODE = stoi(argv[5]);
-    string DEBUG_PATH;
+    string DEBUG_PATH = string(argv[6]);
 
     vector<vector<bool>> randomInitialFrame;
     for (int row = 0; row < SIZE; row++) {
