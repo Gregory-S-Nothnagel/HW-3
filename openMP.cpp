@@ -52,7 +52,7 @@ public:
 
     Conway(int SIZE, vector<vector<bool>>& initialFrame) : SIZE(SIZE) {
 
-        cells = new bool* [SIZE + 2];
+        cells = new bool * [SIZE + 2];
         for (int i = 0; i < SIZE + 2; i++) {
             cells[i] = new bool[SIZE + 2];
             for (int j = 0; j < SIZE + 2; j++) cells[i][j] = false; // all cells start dead
@@ -66,7 +66,7 @@ public:
         }
 
         // Array of next frames cells is a copy of start frame
-        cellsNext = new bool* [SIZE + 2];
+        cellsNext = new bool * [SIZE + 2];
         for (int i = 0; i < SIZE + 2; i++) {
             cellsNext[i] = new bool[SIZE + 2];
             for (int j = 0; j < SIZE + 2; j++) {
@@ -80,7 +80,7 @@ public:
 
         bool change = false;
 
-        if (DEBUG_MODE) {
+        if (DEBUG_MODE){
             toFile(DEBUG_PATH, "w", false);
         }
 
