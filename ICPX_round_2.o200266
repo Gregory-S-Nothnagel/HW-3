@@ -1,0 +1,28 @@
+setting asax scratch directory
+
+============================================================
+=====         Summary of your script job               =====
+============================================================
+  The script file is: myscriptICPX.sh
+  The time limit is 1:00:00 HH:MM:SS.
+  The target directory is: /home/ualclsd0186/HW-3
+  The working directory is:  /scratch-local/ualclsd0186.ICPX_round_2.200266.asax-pbs1
+  The memory limit is: 10gb
+  The job will start running after: 202410172139.44
+  Job Name: ICPX_round_2
+  Queue: -q class -W group_list=classq
+  Constraints:
+  Using  20  cores on master node  asax020.asc.edu
+  Node list:  asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu asax020.asc.edu
+  Cores:  20
+  Command typed:
+/scripts/run_script myscriptICPX.sh
+  Queue submit command:
+qsub -q class -W group_list=classq -j oe -N ICPX_round_2 -a 202410172139.44 -r n -M gsnothnagel@crimson.ua.edu -l walltime=1:00:00 -l select=ncpus=20:mpiprocs=20:mem=10000mb
+start /scratch/ualclsd0186/5000.5000.20.txt end: 33, stopped after 5000 iterations
+start /scratch/ualclsd0186/5000.5000.16.txt end: 33, stopped after 5000 iterations
+start /scratch/ualclsd0186/5000.5000.10.txt end: 50, stopped after 5000 iterations
+start /scratch/ualclsd0186/5000.5000.8.txt end: 62, stopped after 5000 iterations
+start /scratch/ualclsd0186/5000.5000.4.txt end: 121, stopped after 5000 iterations
+start /scratch/ualclsd0186/5000.5000.2.txt end: 244, stopped after 5000 iterations
+start /scratch/ualclsd0186/5000.5000.1.txt end: 489, stopped after 5000 iterations
