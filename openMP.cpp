@@ -13,7 +13,7 @@ To Compile, use this script:
 #!/bin/bash
 source /apps/profiles/modules_asax.sh.dyn
 module load intel
-icpx -O3 -march=native -flto -funroll-loops -ffast-math -Wall -o openMP openMP.cpp -fopenmp
+icpx -O3 -march=native -flto -funroll-loops -ffast-math -Wall -o openMP openMP.cpp -qopenmp
 
 To Run, use this command:
 
